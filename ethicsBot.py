@@ -1,10 +1,11 @@
 from platform import python_version
+from dotenv import load_dotenv
 from math import inf
 from os import times
 import requests
 import tweepy
-import sys
 import ast
+import os
 
 class EthicsListener(tweepy.Stream):
 
@@ -96,19 +97,17 @@ class EthicsListener(tweepy.Stream):
             return False
 
         
-def listen(argv, string_list = [""]):
+def listen(string_list = [""]):
     
-    file = open(sys.argv[1], "r")
-    contents = file.read()
-    twitter_auth_keys = ast.literal_eval(contents)
+    load_dotenv()
     
     auth = tweepy.OAuthHandler(
-            twitter_auth_keys['consumer_key'],
-            twitter_auth_keys['consumer_secret']
+            os.environ.get('CONSUMER_KEY'),
+            os.environ.get('CONSUMER_SECRET')
             )
     auth.set_access_token(
-            twitter_auth_keys['access_token'],
-            twitter_auth_keys['access_token_secret']
+            os.environ.get('ACCESS_TOKEN'),
+            os.environ.get('ACCESS_TOKEN_SECRET')
             )
     
     api = tweepy.API(auth)
@@ -121,4 +120,4 @@ def listen(argv, string_list = [""]):
 
 
 if __name__ == "__main__":
-    listen(sys.argv[1:], string_list = ["ethics", "ethicaly", "ética", "morally" "privacy", "privacidade", "#ethicsBot", "#botEtico"])
+    listen(string_list = ["ethics", "ethicaly", "ética", "morally" "privacy", "privacidade", "#ethicsBot", "#botEtico"])
