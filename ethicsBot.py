@@ -135,3 +135,4 @@ def listen(string_list = [""]):
 
 if __name__ == "__main__":
     listen(string_list = ["ethics", "ethical", "ethically", "ética", "ético", "moral", "morally", "#ethicsBot", "#botEtico"])
+
