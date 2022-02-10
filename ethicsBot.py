@@ -65,34 +65,40 @@ class EthicsListener(tweepy.Stream):
 
         # Related Terms
         if (
-            status.text.find("computation")  != -1 or status.text.find("computação")     != -1 or
-            status.text.find("computing")    != -1 or 
-            status.text.find("social media") != -1 or status.text.find("redes sociais")  != -1 or
+            status.text.find("programming")  != -1 or 
             status.text.find("software")     != -1 or 
-            status.text.find("algorithm")    != -1 or status.text.find("algoritmo")      != -1 or
-            status.text.find("algorithms")   != -1 or 
-            status.text.find("tecnology")    != -1 or status.text.find("tecnologia")     != -1 or
-            status.text.find(" tech")        != -1 or
-            status.text.find("intenet")      != -1 or
-            status.text.find("AI")           != -1 or
-            status.text.find("artificial inteligence")    != -1 or status.text.find("inteligência artificial")  != -1 or
-            status.text.find("software engineering")      != -1 or status.text.find("engenharia de software")   != -1 or
-            status.text.find("requirements engineering")  != -1 or status.text.find("engenharia de requisitos") != -1
+            status.text.find("data")         != -1 or 
+            status.text.find(" tech ")       != -1 or 
+            status.text.find(" tech.")       != -1 or 
+            status.text.find("internet")     != -1 or 
+            status.text.find("computing")    != -1 or 
+            status.text.find("hacker")       != -1 or 
+            status.text.find("hacking")      != -1 or 
+            status.text.find(" IT ")         != -1 or status.text.find(" TI ")          != -1 or 
+            status.text.find("computation")  != -1 or status.text.find("computação")    != -1 or
+            status.text.find("social media") != -1 or status.text.find("redes sociais") != -1 or
+            status.text.find("algorithm")    != -1 or status.text.find("algoritmo")     != -1 or
+            status.text.find("technology")   != -1 or status.text.find("tecnologia")    != -1 or
+            status.text.find("cloud")        != -1 or status.text.find("nuvem")         != -1 or
+            status.text.find(" AI ")         != -1 or status.text.find(" IA ")          != -1 or
+            status.text.find(" AI.")         != -1 or status.text.find(" IA.")          != -1 or
+            status.text.find("artificial inteligence")   != -1 or status.text.find("inteligência artificial")  != -1 or
+            status.text.find("requirements engineering") != -1 or status.text.find("engenharia de requisitos") != -1
             ):
-                    pass
+            pass
         else:
             return
 
+        print('Username: ' + status.user.screen_name)
         print(status.text)
+
         if not status.retweeted:
             # Retweet, since we have not retweeted it yet
             try:
                 self.api.retweet(status.id)
             except Exception as e:
-                logger.error("Error on fav and retweet", exc_info=True)
-
-        # print('Username: ' + status.user.screen_name)
-        # print(status.text)
+                # logger.error("Error on fav and retweet", exc_info=True)
+                return
 
     def on_limit(self,status):
         # Rate Limit Exceeded, Sleep for 15 Mins
@@ -129,4 +135,4 @@ def listen(string_list = [""]):
 
 
 if __name__ == "__main__":
-    listen(string_list = ["ethics", "ethicaly", "ética", "morally" "privacy", "#ethicsBot", "#botEtico"])
+    listen(string_list = ["ethics", "ethical", "ethicaly", "ética", "ético", "morally" "privacy", "#ethicsBot", "#botEtico"])
