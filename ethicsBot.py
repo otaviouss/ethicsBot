@@ -1,5 +1,4 @@
 from platform import python_version
-from asyncio.log import logger
 from dotenv import load_dotenv
 from math import inf
 from os import times
@@ -135,4 +134,5 @@ def listen(string_list = [""]):
 
 
 if __name__ == "__main__":
-    listen(string_list = ["ethics", "ethical", "ethicaly", "ética", "ético", "morally" "privacy", "#ethicsBot", "#botEtico"])
+    listen(string_list = ["ethics", "ethical", "ethically", "ética", "ético", "moral", "morally", "#ethicsBot", "#botEtico"])
+
