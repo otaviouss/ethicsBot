@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
-          command: timeout -s SIGQUIT 3s python ethicsBot.py
+          command: timeout -s SIGTERM 3s python ethicsBot.py
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
