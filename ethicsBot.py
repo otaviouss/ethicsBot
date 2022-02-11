@@ -88,8 +88,8 @@ class EthicsListener(tweepy.Stream):
         else:
             return
 
-        print('Username: ' + status.user.screen_name)
-        print(status.text)
+        # print('Username: ' + status.user.screen_name)
+        # print(status.text)
 
         if not status.retweeted:
             # Retweet, since we have not retweeted it yet
@@ -134,4 +134,4 @@ def listen(string_list = [""]):
 
 
 if __name__ == "__main__":
-    listen(string_list = ["ethics", "ethical", "ethically", "ética", "ético", "moral", "morally", "#ethicsBot", "#botEtico"])
+    listen(string_list = ["ethics", "ethical", "unethical", "ethically", "ética", "ético", "morally", "#ethicsBot", "#botEtico"])
