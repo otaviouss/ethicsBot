@@ -1,3 +1,4 @@
+from deep_translator import GoogleTranslator
 from platform import python_version
 from dotenv import load_dotenv
 from math import inf
@@ -20,6 +21,7 @@ class EthicsListener(tweepy.Stream):
         self.max_retries = max_retries
         self.proxies = {"https": proxy} if proxy else {}
         self.verify = verify
+        self.last_tweet = "null"
 
         self.running = False
         self.session = None
@@ -62,39 +64,64 @@ class EthicsListener(tweepy.Stream):
         except:
             pass
 
+        # Non Desired Terms
+        if(
+            status.text.find("deal")      != -1 or
+            status.text.find("promotion") != -1 or
+            status.text.find("download")  != -1 or
+            status.text.find("sale")      != -1 or
+            status.text == self.last_tweet
+        ):
+            return
+
         # Related Terms
         if (
-            status.text.find("programming")  != -1 or 
             status.text.find("software")     != -1 or 
-            status.text.find("data")         != -1 or 
             status.text.find(" tech ")       != -1 or 
             status.text.find(" tech.")       != -1 or 
             status.text.find("internet")     != -1 or 
+            status.text.find("Internet")     != -1 or 
             status.text.find("computing")    != -1 or 
+            status.text.find("Computing")    != -1 or 
             status.text.find("hacker")       != -1 or 
             status.text.find("hacking")      != -1 or 
+            status.text.find("data")         != -1 or status.text.find("dados")         != -1 or
+            status.text.find("Data")         != -1 or status.text.find("Dados")         != -1 or
+            status.text.find("coding")       != -1 or status.text.find("codificar")     != -1 or
+            status.text.find("programming")  != -1 or status.text.find("programação")   != -1 or
             status.text.find(" IT ")         != -1 or status.text.find(" TI ")          != -1 or 
             status.text.find("computation")  != -1 or status.text.find("computação")    != -1 or
+            status.text.find("Computation")  != -1 or status.text.find("Computação")    != -1 or
             status.text.find("social media") != -1 or status.text.find("redes sociais") != -1 or
+            status.text.find("Social media") != -1 or status.text.find("Redes sociais") != -1 or
             status.text.find("algorithm")    != -1 or status.text.find("algoritmo")     != -1 or
+            status.text.find("Algorithm")    != -1 or status.text.find("Algoritmo")     != -1 or
             status.text.find("technology")   != -1 or status.text.find("tecnologia")    != -1 or
+            status.text.find("Technology")   != -1 or status.text.find("Tecnologia")    != -1 or
             status.text.find("cloud")        != -1 or status.text.find("nuvem")         != -1 or
             status.text.find(" AI ")         != -1 or status.text.find(" IA ")          != -1 or
             status.text.find(" AI.")         != -1 or status.text.find(" IA.")          != -1 or
             status.text.find("artificial inteligence")   != -1 or status.text.find("inteligência artificial")  != -1 or
+            status.text.find("Artificial Inteligence")   != -1 or status.text.find("Inteligência Artificial")  != -1 or
             status.text.find("requirements engineering") != -1 or status.text.find("engenharia de requisitos") != -1
             ):
             pass
         else:
             return
 
-        # print('Username: ' + status.user.screen_name)
+        # print('---\nUsername: ' + status.user.screen_name)
         # print(status.text)
+
+        translated_tweet = GoogleTranslator(source='auto', target='pt').translate(status.text)
+        
+        # Updating last retweeted tweet
+        self.last_tweet = status.text
 
         if not status.retweeted:
             # Retweet, since we have not retweeted it yet
             try:
-                self.api.retweet(status.id)
+                # self.api.retweet(status.id)
+                self.api.update_status(translated_tweet, attachment_url='https://twitter.com/'+status.user.screen_name+'/status/'+status.id_str)
             except Exception as e:
                 # logger.error("Error on fav and retweet", exc_info=True)
                 return
@@ -134,4 +161,4 @@ def listen(string_list = [""]):
 
 
 if __name__ == "__main__":
-    listen(string_list = ["ethics", "ethical", "unethical", "ethically", "ética", "ético", "morally", "#ethicsBot", "#botEtico"])
+    listen(string_list = ["ethics", "ethical", "ethically", "ética", "ético", "social computing", "computação social", "#ethicsBot", "#botEtico"])
