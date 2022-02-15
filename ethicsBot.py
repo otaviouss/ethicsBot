@@ -1,4 +1,3 @@
-from asyncio.log import logger
 from deep_translator import GoogleTranslator
 from platform import python_version
 from dotenv import load_dotenv
@@ -74,6 +73,8 @@ class EthicsListener(tweepy.Stream):
             status.full_text.find("Download")  != -1 or
             status.full_text.find("sale")      != -1 or
             status.full_text.find("Sale")      != -1 or
+            status.full_text.find("#coding")   != -1 or
+            status.full_text.find("homework")  != -1 or
             status.full_text == self.last_tweet
         ):
             return
@@ -113,8 +114,8 @@ class EthicsListener(tweepy.Stream):
         else:
             return
 
-        print('---\nUsername: ' + status.user.screen_name)
-        print(status.full_text)
+        # print('---\nUsername: ' + status.user.screen_name)
+        # print(status.full_text)
 
         translated_tweet = GoogleTranslator(source='auto', target='pt').translate(status.full_text)
         
