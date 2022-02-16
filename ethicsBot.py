@@ -65,50 +65,59 @@ class EthicsListener(tweepy.Stream):
 
         # Non Desired Terms
         if(
-            status.full_text.find("deal")      != -1 or
-            status.full_text.find("Deal")      != -1 or
-            status.full_text.find("promotion") != -1 or
-            status.full_text.find("Promotion") != -1 or
-            status.full_text.find("download")  != -1 or
-            status.full_text.find("Download")  != -1 or
-            status.full_text.find("sale")      != -1 or
-            status.full_text.find("Sale")      != -1 or
-            status.full_text.find("#coding")   != -1 or
-            status.full_text.find("homework")  != -1 or
+            status.full_text.find("$")              != -1 or
+            status.full_text.find("deal")           != -1 or
+            status.full_text.find("Deal")           != -1 or
+            status.full_text.find("promotion")      != -1 or
+            status.full_text.find("Promotion")      != -1 or
+            status.full_text.find("download")       != -1 or
+            status.full_text.find("Download")       != -1 or
+            status.full_text.find("sale")           != -1 or
+            status.full_text.find("Sale")           != -1 or
+            status.full_text.find("homework")       != -1 or
+            status.full_text.find("#coding")        != -1 or
+            status.full_text.find("#soulecting")    != -1 or
+            status.user.screen_name == ("mediaethicsbot") or # Reason: profile that post random content
             status.full_text == self.last_tweet
         ):
             return
+        
+        translated_tweet = GoogleTranslator(source='auto', target='pt').translate(status.full_text)
 
         # Related Terms
         if (
-            status.full_text.find("software")     != -1 or 
-            status.full_text.find(" tech ")       != -1 or 
-            status.full_text.find(" tech.")       != -1 or 
-            status.full_text.find("internet")     != -1 or 
-            status.full_text.find("Internet")     != -1 or 
-            status.full_text.find("computing")    != -1 or 
-            status.full_text.find("Computing")    != -1 or 
-            status.full_text.find("hacker")       != -1 or 
-            status.full_text.find("hacking")      != -1 or 
-            status.full_text.find("data")         != -1 or status.full_text.find("dados")         != -1 or
-            status.full_text.find("Data")         != -1 or status.full_text.find("Dados")         != -1 or
-            status.full_text.find("coding")       != -1 or status.full_text.find("codificar")     != -1 or
-            status.full_text.find("programming")  != -1 or status.full_text.find("programação")   != -1 or
-            status.full_text.find(" IT ")         != -1 or status.full_text.find(" TI ")          != -1 or 
-            status.full_text.find("computation")  != -1 or status.full_text.find("computação")    != -1 or
-            status.full_text.find("Computation")  != -1 or status.full_text.find("Computação")    != -1 or
-            status.full_text.find("social media") != -1 or status.full_text.find("redes sociais") != -1 or
-            status.full_text.find("Social media") != -1 or status.full_text.find("Redes sociais") != -1 or
-            status.full_text.find("algorithm")    != -1 or status.full_text.find("algoritmo")     != -1 or
-            status.full_text.find("Algorithm")    != -1 or status.full_text.find("Algoritmo")     != -1 or
-            status.full_text.find("technology")   != -1 or status.full_text.find("tecnologia")    != -1 or
-            status.full_text.find("Technology")   != -1 or status.full_text.find("Tecnologia")    != -1 or
-            status.full_text.find("cloud")        != -1 or status.full_text.find("nuvem")         != -1 or
-            status.full_text.find(" AI ")         != -1 or status.full_text.find(" IA ")          != -1 or
-            status.full_text.find(" AI.")         != -1 or status.full_text.find(" IA.")          != -1 or
-            status.full_text.find("artificial inteligence")   != -1 or status.full_text.find("inteligência artificial")  != -1 or
-            status.full_text.find("Artificial Inteligence")   != -1 or status.full_text.find("Inteligência Artificial")  != -1 or
-            status.full_text.find("requirements engineering") != -1 or status.full_text.find("engenharia de requisitos") != -1
+            translated_tweet.find("ciber")         != -1 or 
+            translated_tweet.find("Ciber")         != -1 or 
+            translated_tweet.find("digital")       != -1 or 
+            translated_tweet.find("Digital")       != -1 or 
+            translated_tweet.find("software")      != -1 or 
+            translated_tweet.find("Software")      != -1 or
+            translated_tweet.find("internet")      != -1 or 
+            translated_tweet.find("Internet")      != -1 or 
+            translated_tweet.find("dados")         != -1 or
+            translated_tweet.find("Dados")         != -1 or 
+            translated_tweet.find("codificar")     != -1 or 
+            translated_tweet.find("Codificar")     != -1 or 
+            translated_tweet.find("programação")   != -1 or
+            translated_tweet.find("Programação")   != -1 or
+            translated_tweet.find(" TI ")          != -1 or 
+            translated_tweet.find("computação")    != -1 or
+            translated_tweet.find("Computação")    != -1 or
+            translated_tweet.find("redes sociais") != -1 or
+            translated_tweet.find("Redes sociais") != -1 or
+            translated_tweet.find("algoritmo")     != -1 or
+            translated_tweet.find("Algoritmo")     != -1 or
+            translated_tweet.find("tecno")         != -1 or
+            translated_tweet.find("Tecno")         != -1 or
+            translated_tweet.find("nuvem")         != -1 or
+            translated_tweet.find("Nuvem")         != -1 or
+            translated_tweet.find(" IA ")          != -1 or
+            translated_tweet.find(" IA.")          != -1 or
+            translated_tweet.find("inteligência artificial")  != -1 or
+            translated_tweet.find("Inteligência Artificial")  != -1 or
+            translated_tweet.find("engenharia de requisitos") != -1 or
+            translated_tweet.find("Engenharia de requisitos") != -1 or
+            translated_tweet.find("Engenharia de Requisitos") != -1
             ):
             pass
         else:
@@ -116,10 +125,9 @@ class EthicsListener(tweepy.Stream):
 
         # print('---\nUsername: ' + status.user.screen_name)
         # print(status.full_text)
-
-        translated_tweet = GoogleTranslator(source='auto', target='pt').translate(status.full_text)
         
         translated_tweet = translated_tweet.replace("&amp;", "&")
+        translated_tweet = translated_tweet.replace("&gt;", ">")
 
         if(translated_tweet == status.full_text):
             # Updating last retweeted tweet
