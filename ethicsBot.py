@@ -65,24 +65,42 @@ class EthicsListener(tweepy.Stream):
 
         # Non Desired Terms
         if(
-            status.full_text.find("$")              != -1 or
-            status.full_text.find("deal")           != -1 or
-            status.full_text.find("Deal")           != -1 or
-            status.full_text.find("promotion")      != -1 or
-            status.full_text.find("Promotion")      != -1 or
-            status.full_text.find("download")       != -1 or
-            status.full_text.find("Download")       != -1 or
-            status.full_text.find("sale")           != -1 or
-            status.full_text.find("Sale")           != -1 or
-            status.full_text.find("homework")       != -1 or
-            status.full_text.find("#coding")        != -1 or
-            status.full_text.find("#soulecting")    != -1 or
-            status.user.screen_name == ("mediaethicsbot") or # Reason: profile that post random content
+            status.full_text.find("$")                != -1 or
+            status.full_text.find("100%")             != -1 or
+            status.full_text.find("deal")             != -1 or
+            status.full_text.find("Deal")             != -1 or
+            status.full_text.find("promotion")        != -1 or
+            status.full_text.find("Promotion")        != -1 or
+            status.full_text.find("download")         != -1 or
+            status.full_text.find("Download")         != -1 or
+            status.full_text.find("product")          != -1 or
+            status.full_text.find("Product")          != -1 or
+            status.full_text.find("sale")             != -1 or
+            status.full_text.find("Sale")             != -1 or
+            status.full_text.find("client")           != -1 or
+            status.full_text.find("Client")           != -1 or
+            status.full_text.find("costumer")         != -1 or
+            status.full_text.find("Costumer")         != -1 or
+            status.full_text.find("homework")         != -1 or
+            status.full_text.find("Homework")         != -1 or
+            status.full_text.find("RT")               != -1 or
+            status.full_text.find("#TransparencyARC") != -1 or
+            status.full_text.find("#100DaysOfCode")   != -1 or
+            status.full_text.find("#coding")          != -1 or
+            status.full_text.find("#soulecting")      != -1 or
+            status.user.screen_name == ("mediaethicsbot")   or # Reason: profile that post random content
             status.full_text == self.last_tweet
         ):
             return
         
         translated_tweet = GoogleTranslator(source='auto', target='pt').translate(status.full_text)
+
+        # Non Desired Terms
+        if(
+            translated_tweet.find("comissão de ética") != -1 or
+            translated_tweet.find("vaga")              != -1
+        ):
+            return
 
         # Related Terms
         if (
@@ -127,6 +145,7 @@ class EthicsListener(tweepy.Stream):
         # print(status.full_text)
         
         translated_tweet = translated_tweet.replace("&amp;", "&")
+        translated_tweet = translated_tweet.replace("&lt;", "<")
         translated_tweet = translated_tweet.replace("&gt;", ">")
 
         if(translated_tweet == status.full_text):
