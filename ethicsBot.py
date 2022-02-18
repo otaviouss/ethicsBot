@@ -103,7 +103,11 @@ class EthicsListener(tweepy.Stream):
         # Non Desired Terms
         if(
             translated_tweet.find("comissão de ética") != -1 or
-            translated_tweet.find("vaga")              != -1
+            translated_tweet.find("Comissão de Ética") != -1 or
+            translated_tweet.find("vaga")              != -1 or
+            translated_tweet.find("Vaga")              != -1 or
+            translated_tweet.find("curso pago")        != -1 or
+            translated_tweet.find("Curso pago")        != -1
         ):
             return
 
@@ -127,7 +131,7 @@ class EthicsListener(tweepy.Stream):
             translated_tweet.find("Algoritmo")     != -1 or
             translated_tweet.find("tecno")         != -1 or
             translated_tweet.find("Tecno")         != -1 or
-            translated_tweet.find("AI")            != -1 or
+            translated_tweet.find(" AI ")          != -1 or
             translated_tweet.find("inteligência artificial")  != -1 or
             translated_tweet.find("Inteligência Artificial")  != -1 or
             translated_tweet.find("engenharia de requisitos") != -1 or
@@ -151,10 +155,16 @@ class EthicsListener(tweepy.Stream):
             pass
         else:
             return
+        
+        # Finding last url to remove when saving last tweet
+        try:
+            url = status.entities['urls'][0].get('url')
+        except:
+            url = ""
 
         if(translated_tweet == status.full_text):
             # Updating last retweeted tweet
-            self.last_tweet = status.full_text
+            self.last_tweet = status.full_text.replace(url, "")
 
             if not status.retweeted:
                 # Retweet, since we have not retweeted it yet
@@ -165,7 +175,7 @@ class EthicsListener(tweepy.Stream):
 
         else:
             # Updating last retweeted tweet
-            self.last_tweet = translated_tweet
+            self.last_tweet = translated_tweet.replace(url, "")
 
             if not status.retweeted:
                 # Retweet, since we have not retweeted it yet
