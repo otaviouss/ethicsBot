@@ -93,7 +93,12 @@ class EthicsListener(tweepy.Stream):
         ):
             return
         
+        # Translating and correcting tweet
         translated_tweet = GoogleTranslator(source='auto', target='pt').translate(status.full_text)
+
+        translated_tweet = translated_tweet.replace("&amp;", "&")
+        translated_tweet = translated_tweet.replace("&lt;", "<")
+        translated_tweet = translated_tweet.replace("&gt;", ">")
 
         # Non Desired Terms
         if(
@@ -106,47 +111,46 @@ class EthicsListener(tweepy.Stream):
         if (
             translated_tweet.find("ciber")         != -1 or 
             translated_tweet.find("Ciber")         != -1 or 
+            translated_tweet.find("virtual")       != -1 or 
+            translated_tweet.find("Virtual")       != -1 or 
             translated_tweet.find("digital")       != -1 or 
             translated_tweet.find("Digital")       != -1 or 
             translated_tweet.find("software")      != -1 or 
             translated_tweet.find("Software")      != -1 or
-            translated_tweet.find("internet")      != -1 or 
-            translated_tweet.find("Internet")      != -1 or 
-            translated_tweet.find("dados")         != -1 or
-            translated_tweet.find("Dados")         != -1 or 
             translated_tweet.find("codificar")     != -1 or 
             translated_tweet.find("Codificar")     != -1 or 
             translated_tweet.find("programação")   != -1 or
             translated_tweet.find("Programação")   != -1 or
-            translated_tweet.find(" TI ")          != -1 or 
             translated_tweet.find("computação")    != -1 or
             translated_tweet.find("Computação")    != -1 or
-            translated_tweet.find("redes sociais") != -1 or
-            translated_tweet.find("Redes sociais") != -1 or
             translated_tweet.find("algoritmo")     != -1 or
             translated_tweet.find("Algoritmo")     != -1 or
             translated_tweet.find("tecno")         != -1 or
             translated_tweet.find("Tecno")         != -1 or
-            translated_tweet.find("nuvem")         != -1 or
-            translated_tweet.find("Nuvem")         != -1 or
-            translated_tweet.find(" IA ")          != -1 or
-            translated_tweet.find(" IA.")          != -1 or
+            translated_tweet.find("AI")            != -1 or
             translated_tweet.find("inteligência artificial")  != -1 or
             translated_tweet.find("Inteligência Artificial")  != -1 or
             translated_tweet.find("engenharia de requisitos") != -1 or
             translated_tweet.find("Engenharia de requisitos") != -1 or
-            translated_tweet.find("Engenharia de Requisitos") != -1
+            translated_tweet.find("Engenharia de Requisitos") != -1 or
+            status.full_text.find("data ethics")              != -1 or
+            status.full_text.find("Data ethics")              != -1 or
+            status.full_text.find("Data Ethics")              != -1 or 
+            status.full_text.find("#dataethics")              != -1 or 
+            status.full_text.find("#DataEthics")              != -1 or 
+            status.full_text.find("internet ethics")          != -1 or
+            status.full_text.find("Internet ethics")          != -1 or
+            status.full_text.find("Internet Ethics")          != -1 or 
+            status.full_text.find("social media ethics")      != -1 or
+            status.full_text.find("Social media ethics")      != -1 or
+            status.full_text.find("Social Media ethics")      != -1 or
+            status.full_text.find("social media Ethics")      != -1 or
+            status.full_text.find("Social media Ethics")      != -1 or
+            status.full_text.find("Social Media Ethics")      != -1
             ):
             pass
         else:
             return
-
-        # print('---\nUsername: ' + status.user.screen_name)
-        # print(status.full_text)
-        
-        translated_tweet = translated_tweet.replace("&amp;", "&")
-        translated_tweet = translated_tweet.replace("&lt;", "<")
-        translated_tweet = translated_tweet.replace("&gt;", ">")
 
         if(translated_tweet == status.full_text):
             # Updating last retweeted tweet
@@ -156,9 +160,7 @@ class EthicsListener(tweepy.Stream):
                 # Retweet, since we have not retweeted it yet
                 try:
                     self.api.retweet(status.id_str)
-                    # self.api.update_status(translated_tweet, attachment_url='https://twitter.com/'+status.user.screen_name+'/status/'+status.id_str)
                 except Exception as e:
-                    # logger.error("Error on fav and retweet", exc_info=True)
                     return
 
         else:
@@ -177,7 +179,6 @@ class EthicsListener(tweepy.Stream):
                         self.api.update_status(translated_tweet, attachment_url='https://twitter.com/'+st.user.screen_name+'/status/'+st.id_str)
                     except:
                         self.api.retweet(status.id_str)
-                        # logger.error("Error on fav and retweet", exc_info=True)
 
     def on_limit(self,status):
         # Rate Limit Exceeded, Sleep for 15 Mins
