@@ -71,18 +71,26 @@ class EthicsListener(tweepy.Stream):
             status.full_text.find("Deal")             != -1 or
             status.full_text.find("promotion")        != -1 or
             status.full_text.find("Promotion")        != -1 or
+            status.full_text.find("hacking")          != -1 or
+            status.full_text.find("Hacking")          != -1 or
+            status.full_text.find("hacker")           != -1 or
+            status.full_text.find("Hacker")           != -1 or
             status.full_text.find("download")         != -1 or
             status.full_text.find("Download")         != -1 or
             status.full_text.find("product")          != -1 or
             status.full_text.find("Product")          != -1 or
             status.full_text.find("sale")             != -1 or
             status.full_text.find("Sale")             != -1 or
+            status.full_text.find("market")           != -1 or
+            status.full_text.find("Market")           != -1 or
             status.full_text.find("client")           != -1 or
             status.full_text.find("Client")           != -1 or
             status.full_text.find("costumer")         != -1 or
             status.full_text.find("Costumer")         != -1 or
             status.full_text.find("homework")         != -1 or
             status.full_text.find("Homework")         != -1 or
+            status.full_text.find("pay")              != -1 or
+            status.full_text.find("Pay")              != -1 or
             status.full_text.find("RT")               != -1 or
             status.full_text.find("#TransparencyARC") != -1 or
             status.full_text.find("#100DaysOfCode")   != -1 or
@@ -99,6 +107,7 @@ class EthicsListener(tweepy.Stream):
         translated_tweet = translated_tweet.replace("&amp;", "&")
         translated_tweet = translated_tweet.replace("&lt;", "<")
         translated_tweet = translated_tweet.replace("&gt;", ">")
+        translated_tweet = translated_tweet.replace("&gt;&gt;", ">>")
 
         # Non Desired Terms
         if(
@@ -106,6 +115,8 @@ class EthicsListener(tweepy.Stream):
             translated_tweet.find("Comissão de Ética") != -1 or
             translated_tweet.find("vaga")              != -1 or
             translated_tweet.find("Vaga")              != -1 or
+            translated_tweet.find("contratar")         != -1 or
+            translated_tweet.find("Contratar")         != -1 or
             translated_tweet.find("curso pago")        != -1 or
             translated_tweet.find("Curso pago")        != -1
         ):
@@ -115,10 +126,12 @@ class EthicsListener(tweepy.Stream):
         if (
             translated_tweet.find("ciber")         != -1 or 
             translated_tweet.find("Ciber")         != -1 or 
-            translated_tweet.find("virtual")       != -1 or 
-            translated_tweet.find("Virtual")       != -1 or 
-            translated_tweet.find("digital")       != -1 or 
-            translated_tweet.find("Digital")       != -1 or 
+            translated_tweet.find("ética virtual") != -1 or 
+            translated_tweet.find("Ética virtual") != -1 or 
+            translated_tweet.find("Ética Virtual") != -1 or 
+            translated_tweet.find("ética digital") != -1 or 
+            translated_tweet.find("Ética digital") != -1 or 
+            translated_tweet.find("Ética Digital") != -1 or 
             translated_tweet.find("software")      != -1 or 
             translated_tweet.find("Software")      != -1 or
             translated_tweet.find("codificar")     != -1 or 
@@ -132,6 +145,9 @@ class EthicsListener(tweepy.Stream):
             translated_tweet.find("tecno")         != -1 or
             translated_tweet.find("Tecno")         != -1 or
             translated_tweet.find(" AI ")          != -1 or
+            translated_tweet.find("#AIEthics")     != -1 or
+            translated_tweet.find("#AIethics")     != -1 or
+            translated_tweet.find("#aiethics")     != -1 or
             translated_tweet.find("inteligência artificial")  != -1 or
             translated_tweet.find("Inteligência Artificial")  != -1 or
             translated_tweet.find("engenharia de requisitos") != -1 or
