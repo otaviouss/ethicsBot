@@ -69,8 +69,12 @@ class EthicsListener(tweepy.Stream):
             status.full_text.find("100%")             != -1 or
             status.full_text.find("deal")             != -1 or
             status.full_text.find("Deal")             != -1 or
+            status.full_text.find("buy")              != -1 or
+            status.full_text.find("Buy")              != -1 or
             status.full_text.find("promotion")        != -1 or
             status.full_text.find("Promotion")        != -1 or
+            status.full_text.find("purchase")         != -1 or
+            status.full_text.find("Purchase")         != -1 or
             status.full_text.find("hacking")          != -1 or
             status.full_text.find("Hacking")          != -1 or
             status.full_text.find("hacker")           != -1 or
@@ -118,7 +122,9 @@ class EthicsListener(tweepy.Stream):
             translated_tweet.find("contratar")         != -1 or
             translated_tweet.find("Contratar")         != -1 or
             translated_tweet.find("curso pago")        != -1 or
-            translated_tweet.find("Curso pago")        != -1
+            translated_tweet.find("Curso pago")        != -1 or
+            translated_tweet.find("whatsapp")          != -1 or
+            translated_tweet.find("Whatsapp")          != -1
         ):
             return
 
@@ -142,8 +148,8 @@ class EthicsListener(tweepy.Stream):
             translated_tweet.find("Computação")    != -1 or
             translated_tweet.find("algoritmo")     != -1 or
             translated_tweet.find("Algoritmo")     != -1 or
-            translated_tweet.find("tecno")         != -1 or
-            translated_tweet.find("Tecno")         != -1 or
+            # translated_tweet.find("tecno")         != -1 or
+            # translated_tweet.find("Tecno")         != -1 or
             translated_tweet.find(" AI ")          != -1 or
             translated_tweet.find("#AIEthics")     != -1 or
             translated_tweet.find("#AIethics")     != -1 or
