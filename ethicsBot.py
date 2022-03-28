@@ -93,6 +93,8 @@ class EthicsListener(tweepy.Stream):
             status.full_text.find("Costumer")         != -1 or
             status.full_text.find("homework")         != -1 or
             status.full_text.find("Homework")         != -1 or
+            status.full_text.find("assignment")       != -1 or
+            status.full_text.find("Assignment")       != -1 or
             status.full_text.find("pay")              != -1 or
             status.full_text.find("Pay")              != -1 or
             status.full_text.find("RT")               != -1 or
@@ -185,9 +187,6 @@ class EthicsListener(tweepy.Stream):
             url = ""
 
         if(translated_tweet == status.full_text):
-            # Updating last retweeted tweet
-            self.last_tweet = status.full_text.replace(url, "")
-
             if not status.retweeted:
                 # Retweet, since we have not retweeted it yet
                 try:
@@ -196,6 +195,9 @@ class EthicsListener(tweepy.Stream):
                     return
 
         else:
+            # If a similar tweet was just published, return
+            if(self.last_tweet == translated_tweet.replace(url, "")): return
+
             # Updating last retweeted tweet
             self.last_tweet = translated_tweet.replace(url, "")
 
