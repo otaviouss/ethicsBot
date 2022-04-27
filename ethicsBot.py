@@ -93,6 +93,8 @@ class EthicsListener(tweepy.Stream):
             status.full_text.find("Costumer")         != -1 or
             status.full_text.find("homework")         != -1 or
             status.full_text.find("Homework")         != -1 or
+            status.full_text.find("assignment")       != -1 or
+            status.full_text.find("Assignment")       != -1 or
             status.full_text.find("pay")              != -1 or
             status.full_text.find("Pay")              != -1 or
             status.full_text.find("RT")               != -1 or
@@ -151,9 +153,9 @@ class EthicsListener(tweepy.Stream):
             # translated_tweet.find("tecno")         != -1 or
             # translated_tweet.find("Tecno")         != -1 or
             translated_tweet.find(" AI ")          != -1 or
-            translated_tweet.find("#AIEthics")     != -1 or
-            translated_tweet.find("#AIethics")     != -1 or
-            translated_tweet.find("#aiethics")     != -1 or
+            # translated_tweet.find("#AIEthics")     != -1 or
+            # translated_tweet.find("#AIethics")     != -1 or
+            # translated_tweet.find("#aiethics")     != -1 or
             translated_tweet.find("inteligência artificial")  != -1 or
             translated_tweet.find("Inteligência Artificial")  != -1 or
             translated_tweet.find("engenharia de requisitos") != -1 or
@@ -162,8 +164,8 @@ class EthicsListener(tweepy.Stream):
             status.full_text.find("data ethics")              != -1 or
             status.full_text.find("Data ethics")              != -1 or
             status.full_text.find("Data Ethics")              != -1 or 
-            status.full_text.find("#dataethics")              != -1 or 
-            status.full_text.find("#DataEthics")              != -1 or 
+            # status.full_text.find("#dataethics")              != -1 or 
+            # status.full_text.find("#DataEthics")              != -1 or 
             status.full_text.find("internet ethics")          != -1 or
             status.full_text.find("Internet ethics")          != -1 or
             status.full_text.find("Internet Ethics")          != -1 or 
@@ -185,9 +187,6 @@ class EthicsListener(tweepy.Stream):
             url = ""
 
         if(translated_tweet == status.full_text):
-            # Updating last retweeted tweet
-            self.last_tweet = status.full_text.replace(url, "")
-
             if not status.retweeted:
                 # Retweet, since we have not retweeted it yet
                 try:
@@ -196,6 +195,9 @@ class EthicsListener(tweepy.Stream):
                     return
 
         else:
+            # If a similar tweet was just published, return
+            if(self.last_tweet == translated_tweet.replace(url, "")): return
+
             # Updating last retweeted tweet
             self.last_tweet = translated_tweet.replace(url, "")
 
