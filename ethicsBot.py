@@ -168,13 +168,7 @@ class EthicsListener(tweepy.Stream):
             # status.full_text.find("#DataEthics")              != -1 or 
             status.full_text.find("internet ethics")          != -1 or
             status.full_text.find("Internet ethics")          != -1 or
-            status.full_text.find("Internet Ethics")          != -1 or 
-            status.full_text.find("social media ethics")      != -1 or
-            status.full_text.find("Social media ethics")      != -1 or
-            status.full_text.find("Social Media ethics")      != -1 or
-            status.full_text.find("social media Ethics")      != -1 or
-            status.full_text.find("Social media Ethics")      != -1 or
-            status.full_text.find("Social Media Ethics")      != -1
+            status.full_text.find("Internet Ethics")          != -1
             ):
             pass
         else:
