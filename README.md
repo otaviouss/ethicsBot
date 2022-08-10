@@ -12,3 +12,5 @@ Then, you can simple run:
 `python3 ethicsBot.py`
 
 This is a personal/educational project.
+
+Follow [@ethicsBot_](https://twitter.com/ethicsBot_) on Twitter!
