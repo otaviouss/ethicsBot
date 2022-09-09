@@ -95,9 +95,13 @@ class EthicsListener(tweepy.Stream):
             status.full_text.find("Homework")         != -1 or
             status.full_text.find("assignment")       != -1 or
             status.full_text.find("Assignment")       != -1 or
+            status.full_text.find("assignments")      != -1 or
+            status.full_text.find("Assignments")      != -1 or
             status.full_text.find("pay")              != -1 or
             status.full_text.find("Pay")              != -1 or
             status.full_text.find("RT")               != -1 or
+            status.full_text.find("🔹")               != -1 or
+            status.full_text.find("نمشے")             != -1 or
             status.full_text.find("#TransparencyARC") != -1 or
             status.full_text.find("#100DaysOfCode")   != -1 or
             status.full_text.find("#coding")          != -1 or
@@ -121,6 +125,8 @@ class EthicsListener(tweepy.Stream):
             translated_tweet.find("Comissão de Ética") != -1 or
             translated_tweet.find("vaga")              != -1 or
             translated_tweet.find("Vaga")              != -1 or
+            translated_tweet.find("contrate")          != -1 or
+            translated_tweet.find("Contrate")          != -1 or
             translated_tweet.find("contratar")         != -1 or
             translated_tweet.find("Contratar")         != -1 or
             translated_tweet.find("curso pago")        != -1 or
@@ -242,7 +248,7 @@ def listen(string_list = [""]):
     api = tweepy.API(auth)
 
     ethics_listener = EthicsListener(auth.consumer_key, auth.consumer_secret, auth.access_token, auth.access_token_secret, api)
-    
+
     ethics_listener.filter(track=string_list) # Define which strings to watch
     
     ethics_listener.sample() # Start the stream
