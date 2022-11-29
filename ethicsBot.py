@@ -63,6 +63,10 @@ class EthicsListener(tweepy.Stream):
         except:
             pass
 
+        print(status.user.followers_count)
+        # If the user who made the post has less than 40 followers
+        if(status.user.followers_count < 40): return
+
         # Non Desired Terms
         if(
             status.full_text.find("$")                != -1 or
@@ -235,7 +239,7 @@ class EthicsListener(tweepy.Stream):
 def listen(string_list = [""]):
     
     load_dotenv()
-    
+
     auth = tweepy.OAuthHandler(
             os.environ.get('CONSUMER_KEY'),
             os.environ.get('CONSUMER_SECRET')
