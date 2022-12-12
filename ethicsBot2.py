@@ -122,9 +122,9 @@ class EthicsListener(tweepy.StreamingClient):
             translated_tweet.find("tecno")         != -1 or
             translated_tweet.find("Tecno")         != -1 or
             translated_tweet.find(" AI ")          != -1 or
-            translated_tweet.find("#AIEthics")     != -1 or
-            translated_tweet.find("#AIethics")     != -1 or
-            translated_tweet.find("#aiethics")     != -1 or
+            #translated_tweet.find("#AIEthics")     != -1 or
+            #translated_tweet.find("#AIethics")     != -1 or
+            #translated_tweet.find("#aiethics")     != -1 or
             translated_tweet.find("inteligência artificial")  != -1 or
             translated_tweet.find("Inteligência Artificial")  != -1 or
             translated_tweet.find("engenharia de requisitos") != -1 or
@@ -133,8 +133,8 @@ class EthicsListener(tweepy.StreamingClient):
             text.find("data ethics")              != -1 or
             text.find("Data ethics")              != -1 or
             text.find("Data Ethics")              != -1 or 
-            text.find("#dataethics")              != -1 or 
-            text.find("#DataEthics")              != -1 or 
+            #text.find("#dataethics")              != -1 or 
+            #text.find("#DataEthics")              != -1 or 
             text.find("internet ethics")          != -1 or
             text.find("Internet ethics")          != -1 or
             text.find("Internet Ethics")          != -1 or 
